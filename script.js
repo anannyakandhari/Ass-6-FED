@@ -5,17 +5,19 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("trivia-form");
     const questionContainer = document.getElementById("question-container");
     const newPlayerButton = document.getElementById("new-player");
-
-    
+     
+    // Initialize the game
+    fetchQuestions();
+    displayScores();
 
     function setCookie(name, value, days = 3) {
     const date = new Date();
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
     const expires = "expires=" + date.toUTCString();
     document.cookie = `${name}=${value}; ${expires}; path=/`;
-}
+    }
 
-function getCookie(name) {
+    function getCookie(name) {
     const cookies = document.cookie.split(";");
     for (let c of cookies) {
         c = c.trim();
@@ -24,12 +26,12 @@ function getCookie(name) {
         }
     }
     return "";
-}
+   }
+     //check username
+    function checkUsername() {
+    const savedName = getCookie("username");
+    const usernameInput = document.getElementById("username");
 
-  // Initialize the game
-    // checkUsername(); Uncomment once completed
-    fetchQuestions();
-    displayScores();
 
     /**
      * Fetches trivia questions from the API and displays them.
