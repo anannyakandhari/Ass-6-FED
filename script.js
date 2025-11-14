@@ -6,7 +6,27 @@ document.addEventListener("DOMContentLoaded", function () {
     const questionContainer = document.getElementById("question-container");
     const newPlayerButton = document.getElementById("new-player");
 
-    // Initialize the game
+    
+
+    function setCookie(name, value, days = 3) {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    const expires = "expires=" + date.toUTCString();
+    document.cookie = `${name}=${value}; ${expires}; path=/`;
+}
+
+function getCookie(name) {
+    const cookies = document.cookie.split(";");
+    for (let c of cookies) {
+        c = c.trim();
+        if (c.startsWith(name + "=")) {
+            return c.substring(name.length + 1);
+        }
+    }
+    return "";
+}
+
+  // Initialize the game
     // checkUsername(); Uncomment once completed
     fetchQuestions();
     displayScores();
@@ -28,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 showLoading(false); // Hide loading state on error
             });
     }
+    
 
     /**
      * Toggles the display of the loading state and question container.
