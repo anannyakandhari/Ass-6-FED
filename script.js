@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchQuestions();
     displayScores();
 
+    // expire after 72 hours 
     function setCookie(name, value, days = 3) {
     const date = new Date();
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
@@ -27,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     return "";
    }
-     //check username
+     //check username at starting
     function checkUsername() {
     const savedName = getCookie("username");
     const usernameInput = document.getElementById("username");
@@ -128,3 +129,19 @@ document.addEventListener("DOMContentLoaded", function () {
         //... form submission logic including setting cookies and calculating score
     }
 });
+       
+    const nameInput = document.getElementById("username");
+    let savedName = getCookie("username");
+
+    // so basiclly if the game doesnot have saved username yet but 
+    //player typed the name now so it will save it
+    if (savedName === "" && enteredName !== "") {
+        setCookie("username", enteredName);
+        savedName = enteredName;
+         }
+
+    // Stop if still no name
+    if (savedName === "") {
+        alert("Please enter your name.");
+        return;
+    }
