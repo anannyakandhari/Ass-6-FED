@@ -145,3 +145,22 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Please enter your name.");
         return;
     }
+        // calculating score section
+
+     const score = calculateScore();
+        saveScore(savedName, score);
+
+    // lets calculate the scores 
+     function calculateScore() {
+        let total = 0;
+        const pickedAnswers = document.querySelectorAll("input[type='radio']:checked");
+
+        pickedAnswers.forEach(function (item) {
+            if (item.dataset.correct === "true") {
+                total++;
+            }
+        });
+
+        return total;
+    }
+
