@@ -205,4 +205,5 @@ document.addEventListener("DOMContentLoaded", function () {
     //after new player name entered
     // Hide the New Player button
     newPlayerButton.classList.add("hidden");
-}
+    }
+});
