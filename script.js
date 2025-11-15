@@ -149,6 +149,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
      const score = calculateScore();
         saveScore(savedName, score);
+        displayScores();
+        fetchQuestions();
+    
 
     // lets calculate the scores 
      function calculateScore() {
