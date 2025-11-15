@@ -166,4 +166,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         return total;
     }
+    // save score funct.
+    function saveScore(username, score) {
+        // // getting scores saved
+    let allScores = JSON.parse(localStorage.getItem("scores") || "[]");
 
+    allScores.push({ username, score });
+    localStorage.setItem("scores", JSON.stringify(allScores));
+    }
+    //now we will command to display store 
+    function displayScores() {
+    const tableBody = document.querySelector("#score-table tbody");
+    tableBody.innerHTML = ""; // clear table first
+
+    const storedScores = JSON.parse(localStorage.getItem("scores")) || [];
+    }
