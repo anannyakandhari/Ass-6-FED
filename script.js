@@ -181,3 +181,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const storedScores = JSON.parse(localStorage.getItem("scores")) || [];
     }
+    function newPlayer() {
+    // Remove username cookie 
+    setCookie("username", "", -1);
+    //and helps to add new player name
+    const usernameInput = document.getElementById("username");
+    usernameInput.disabled = false;
+    usernameInput.value = "";
+    //after new player name entered
+    // Hide the New Player button
+    newPlayerButton.classList.add("hidden");
+}
