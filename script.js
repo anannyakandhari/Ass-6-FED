@@ -4,8 +4,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("trivia-form");
     const questionContainer = document.getElementById("question-container");
-    const newPlayerButton = document.getElementById("new-player");
-     
+    const newPlayerButton = document.getElementById("new-player");// without this btn will not work at all
+    const usernameInput = document.getElementById("username");// moved here as otherwise it would show error
     // Initialize the game
     checkUsername();     
     fetchQuestions();
@@ -198,7 +198,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Remove username cookie 
     setCookie("username", "", -1);
     //and helps to add new player name
-    const usernameInput = document.getElementById("username");
     usernameInput.disabled = false;
     usernameInput.value = "";
     //after new player name entered
