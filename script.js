@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const newPlayerButton = document.getElementById("new-player");
      
     // Initialize the game
+    checkUsername();     
     fetchQuestions();
     displayScores();
 
@@ -31,7 +32,12 @@ document.addEventListener("DOMContentLoaded", function () {
      //check username at starting
     function checkUsername() {
     const savedName = getCookie("username");
-    const usernameInput = document.getElementById("username");
+   if (savedName) {
+            nameInput.value = savedName;
+            nameInput.disabled = true; // won't allow to return
+            newPlayerButton.classList.remove("hidden"); // show "New Player" button
+        }
+    }
 
 
     /**
@@ -126,21 +132,19 @@ document.addEventListener("DOMContentLoaded", function () {
      */
     function handleFormSubmit(event) {
         event.preventDefault();
-        //... form submission logic including setting cookies and calculating score
-    }
-});
-       
-    const nameInput = document.getElementById("username");
+        //username chk
+    const enteredName = nameInput.value.trim();
     let savedName = getCookie("username");
-
-    // so basiclly if the game doesnot have saved username yet but 
-    //player typed the name now so it will save it
+    
+    // so basiclly if the game doesnot have saved username yet 
+    //but now player can type the name now so it will save it
+    
     if (savedName === "" && enteredName !== "") {
         setCookie("username", enteredName);
         savedName = enteredName;
          }
 
-    // Stop if still no name
+    // if no name entered yet will stop it from going further
     if (savedName === "") {
         alert("Please enter your name.");
         return;
@@ -151,7 +155,8 @@ document.addEventListener("DOMContentLoaded", function () {
         saveScore(savedName, score);
         displayScores();
         fetchQuestions();
-    
+    }
+
 
     // lets calculate the scores 
      function calculateScore() {
@@ -174,13 +179,21 @@ document.addEventListener("DOMContentLoaded", function () {
     allScores.push({ username, score });
     localStorage.setItem("scores", JSON.stringify(allScores));
     }
+
     //now we will command to display store 
     function displayScores() {
     const tableBody = document.querySelector("#score-table tbody");
     tableBody.innerHTML = ""; // clear table first
 
     const storedScores = JSON.parse(localStorage.getItem("scores")) || [];
+ //without this it stored score value can't be read 
+        storedScores.forEach(({ username, score }) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `<td>${username}</td><td>${score}</td>`;
+            tableBody.appendChild(row);
+        });
     }
+
     function newPlayer() {
     // Remove username cookie 
     setCookie("username", "", -1);
